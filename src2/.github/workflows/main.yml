@@ -20,27 +20,6 @@ jobs:
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v1.4.2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - run: npm install
-      - run: npm run bundle
-      - run: npx typedoc -out bundles/docs
-        continue-on-error: true
-
-      - name: Deploy Sources
-        uses: s0/git-publish-subdir-action@master
-        env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: bundles
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      
-      - name: Checkout Branch
-        uses: actions/checkout@v2
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
@@ -62,3 +41,6 @@ jobs:
           git push --force origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      
+
